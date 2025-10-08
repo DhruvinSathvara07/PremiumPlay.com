@@ -6,18 +6,16 @@ import connectDB from "./db/db.js";
 
 const app = express();
 
-//Database connction function
 connectDB()
     .then(() => {
         app.listen(process.env.PORT || 8000, () => {
-            console.log(`server is running : ${process.env.PORT}`);
+            console.log(`Server is running on port: ${process.env.PORT || 8000}`);
         });
     })
     .catch((err) => {
-        console.log("MongoDB Conncection Failed !", err);
-    })
+        console.log("MongoDB Connection Failed!", err);
+    });
 
 app.get("/", (req, res) => {
     res.send("Server is running!");
 });
-
