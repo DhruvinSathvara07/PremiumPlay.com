@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudniary.js";
 import ApiResponse from "../utils/apiResponse.js";
 import fs from "fs";
+// import fs from "fs";
 
 // Register users
 const registerUser = asyncHandler(async (req, res) => {
