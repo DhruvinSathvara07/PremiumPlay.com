@@ -1,4 +1,3 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiError from "../utils/apiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
@@ -7,7 +6,7 @@ import fs from "fs";
 // import fs from "fs";
 
 // Register users
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = async (req, res) => {
     const { userName, email, fullName, password } = req.body;
 
     if ([fullName, email, userName, password].some((field) => !field?.trim())) {
@@ -64,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
     return res
         .status(201)
         .json(new ApiResponse(200, createdUser, "User created successfully!"));
-});
+};
 
 // const loginUser = asyncHandler(async (req, res) => {
 //     const { userName, email, password } = req.body;
