@@ -5,7 +5,7 @@ import { uploadOnCloudinary } from "../utils/cloudniary.js";
 import ApiResponse from "../utils/apiResponse.js";
 import fs from "fs";
 
-// Register user
+// Register users
 const registerUser = asyncHandler(async (req, res) => {
     const { userName, email, fullName, password } = req.body;
 
@@ -86,5 +86,28 @@ const registerUser = asyncHandler(async (req, res) => {
 //         throw new ApiError(401, "Invalid user credntails !");
 //     }
 // });
+
+// const loginUser = asyncHandler(async (req, res) => {
+//     const { userName, email, password } = req.body;
+
+//     if (!userName || !email) {
+//         throw new ApiError(400, "UserName is required !");
+//     }
+
+//     const user = await User.findOne({
+//         $or: [{ userName }, { email }]
+//     });
+
+//     if (!user) {
+//         throw new ApiError(404, "User Does not exist !");
+//     }
+
+//     const isPasswordValid = await user.isPasswordCorrect(password);
+
+//     if (!isPasswordValid) {
+//         throw new ApiError(401, "Invalid user credntails !");
+//     }
+// });
+
 
 export default registerUser;
