@@ -26,5 +26,6 @@ router.patch("/avatar", verifyJWT, upload.single("avatar"), userController.updat
 router.patch("/cover-image", verifyJWT, upload.single("coverImage"), userController.updateUserCoverImage)
 router.get("/c/:username", verifyJWT, userController.getUserChannelProfile)
 router.get("/history", verifyJWT, userController.getWatchHistory)
+router.patch("/watch/:videoId", verifyJWT, userController.addToWatchHistory)
 
 export default router;

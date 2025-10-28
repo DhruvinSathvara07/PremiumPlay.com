@@ -1,7 +1,7 @@
-import ApiError from "../utils/ApiError.js";
+import ApiError from "../utils/apiError.js";
 import { User } from "../models/user.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import ApiResponse from "../utils/ApiResponse.js";
+import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js";
+import ApiResponse from "../utils/apiResponse.js";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
@@ -442,6 +442,28 @@ const getWatchHistory = async (req, res) => {
     }
 }
 
+const addToWatchHistory = async (req, res) => {
+    try {
+        const { videoId } = req.params;
+        const userId = req.user._id;
+
+        await User.findByIdAndUpdate(
+            userId,
+            {
+                $addToSet: {
+                    watchHistory: videoId
+                }
+            }
+        )
+
+        return res.status(200).json(
+            new ApiResponse(200, {}, "Video added to watch history successfully!")
+        )
+    } catch (error) {
+        throw new ApiError(500, error?.message || "Error adding to watch history!");
+    }
+}
+
 export default {
     registerUser,
     loginUser,
@@ -453,5 +475,6 @@ export default {
     updateUserAvatarImage,
     updateUserCoverImage,
     getUserChannelProfile,
-    getWatchHistory
+    getWatchHistory,
+    addToWatchHistory
 };
